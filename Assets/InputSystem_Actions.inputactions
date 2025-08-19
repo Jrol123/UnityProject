@@ -716,6 +716,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "RocketLauncher",
+            "id": "7ed86843-ec4c-4954-af2b-c55f2955f117",
+            "actions": [
+                {
+                    "name": "Launch",
+                    "type": "Button",
+                    "id": "cd81b171-4b7b-4c62-90eb-4e84f6f16a59",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "c82145b4-5e7d-4d44-aa62-9b9270659852",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Launch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [
