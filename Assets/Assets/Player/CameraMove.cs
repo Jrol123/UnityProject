@@ -2,17 +2,15 @@ using UnityEngine;
 
 public class CameraMove : MonoBehaviour
 {
-    // private Rigidbody rb;
-    private Camera cam;
     private Vector3 camOffset;
     [SerializeField] private Transform Player;
+    [SerializeField] private float speed = 0.5f;
+    private float t = 0;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        // rb = Player.GetComponent<Rigidbody>();
-        cam = GetComponent<Camera>();
-        camOffset = cam.transform.position;
+        camOffset = transform.position;
     }
 
     // Update is called once per frame
@@ -23,14 +21,17 @@ public class CameraMove : MonoBehaviour
 
     void FixedUpdate()
     {
-        Moveing();
+        Moving();
     }
 
-    void Moveing()
+    void Moving()
     {
-        // cam.transform.position.x = Player.position.x;
+        t += Time.deltaTime * speed;
         Vector3 new_pos = new Vector3(Player.position.x, 0, Player.position.z) + camOffset;
-        cam.transform.position = new_pos;
+        transform.position = Vector3.Lerp(transform.position, new_pos, t * speed);
+        // cam.transform.position.x = Player.position.x;
+        // Vector3 new_pos = new Vector3(Player.position.x, 0, Player.position.z) + camOffset;
+        // cam.transform.position = new_pos;
 
         // rb.MovePosition(rb.position + new Vector3(moveDir.x, 0, moveDir.y).normalized * moveSpeed * Time.fixedDeltaTime);
     }
