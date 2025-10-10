@@ -29,10 +29,5 @@ public class CameraMove : MonoBehaviour
         t += Time.deltaTime * speed;
         Vector3 new_pos = new Vector3(Player.position.x, 0, Player.position.z) + camOffset;
         transform.position = Vector3.Lerp(transform.position, new_pos, t * speed);
-        // cam.transform.position.x = Player.position.x;
-        // Vector3 new_pos = new Vector3(Player.position.x, 0, Player.position.z) + camOffset;
-        // cam.transform.position = new_pos;
-
-        // rb.MovePosition(rb.position + new Vector3(moveDir.x, 0, moveDir.y).normalized * moveSpeed * Time.fixedDeltaTime);
     }
 }
