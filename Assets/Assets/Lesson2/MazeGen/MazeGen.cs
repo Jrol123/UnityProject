@@ -20,7 +20,7 @@ public class MazeGen : MonoBehaviour
         new Vector2Int(0, -1),
         new Vector2Int(-1, 0)
     };
-    Quaternion[] rotations = {
+    private readonly Quaternion[] rotations = {
         Quaternion.Euler(0, 0, 0),
         Quaternion.Euler(0, 90, 0),
         Quaternion.Euler(0, 180, 0),
@@ -58,10 +58,10 @@ public class MazeGen : MonoBehaviour
         matrix[x, y] = 16; // 0b1111 + 0b1 - 1 означает что в этом напарвлении стоит стена. 0b1 - обозначает что мы были в этой точке
         Instantiate(Tile, transform.position + new Vector3(x * offsets.x, 0, y * offsets.y), transform.rotation).transform.parent = transform;
 
-        int[] shuffledIndex = index.OrderBy(x => Random.value).ToArray(); // Выбираем направления случайным способом
+        int[] shuffledIndex = index.OrderBy(x => UnityEngine.Random.value).ToArray(); // Выбираем направления случайным способом
         foreach (int ind in shuffledIndex)
         {
-            
+
             dir = directions[ind];
             nx = x + dir.x;
             ny = y + dir.y;

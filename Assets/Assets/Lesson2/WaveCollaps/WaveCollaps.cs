@@ -8,7 +8,7 @@ public class WaveCollaps : MonoBehaviour
 
     private float[,,] probs;
     private float[,] score;
-    private Vector2Int[] directions = {
+    private readonly Vector2Int[] directions = {
         new Vector2Int(0, 1),
         new Vector2Int(1, 0),
         new Vector2Int(0, -1),
