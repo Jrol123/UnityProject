@@ -20,7 +20,7 @@ public class MazeGen : MonoBehaviour
         new Vector2Int(0, -1),
         new Vector2Int(-1, 0)
     };
-    Quaternion[] rotations = {
+    private readonly Quaternion[] rotations = {
         Quaternion.Euler(0, 0, 0),
         Quaternion.Euler(0, 90, 0),
         Quaternion.Euler(0, 180, 0),
