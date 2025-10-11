@@ -4,7 +4,8 @@ public class CameraMove : MonoBehaviour
 {
     private Vector3 camOffset;
     [SerializeField] private Transform Player;
-    [SerializeField] private float speed = 0.5f;
+    [SerializeField] private float smoothTime = 0.3f;
+    private Vector3 velocity = Vector3.zero;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -15,21 +16,21 @@ public class CameraMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-    }
-
-    void FixedUpdate()
-    {
         Moving();
     }
+
+    // void LateUpdate()
+    // {
+
+    // }
 
     void Moving()
     {
         Vector3 targetPosition = new Vector3(Player.position.x, 0, Player.position.z) + camOffset;
-        transform.position = Vector3.Lerp(
+        transform.position = Vector3.SmoothDamp(
             transform.position,
-            targetPosition,
-            speed * Time.deltaTime
+            targetPosition, ref velocity, smoothTime
+        // speed * Time.deltaTime
         );
     }
 }
