@@ -5,8 +5,8 @@ using UnityEngine;
 [Serializable]
 public class WCTilePair
 {
-    public float prob;
     public GameObject tile;
+    public float prob;
 }
 
 [CreateAssetMenu(fileName = "WCTile", menuName = "Scriptable Objects/WCTile")]
