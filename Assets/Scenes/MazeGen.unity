@@ -440,7 +440,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1450115131
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -453,7 +453,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4cb82b859a322343a416ffb705fe4fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grid: {x: 20, y: 20}
+  grid: {x: 15, y: 15}
   tiles:
   - {fileID: 11400000, guid: e0b0694c842861745b848fade5726d2a, type: 2}
   - {fileID: 11400000, guid: f0be06604fb60be42886dac3f2e20465, type: 2}
