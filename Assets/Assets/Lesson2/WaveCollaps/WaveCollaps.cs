@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -5,6 +6,9 @@ public class WaveCollaps : MonoBehaviour
 {
     [SerializeField] Vector2Int grid;
     [SerializeField] List<WCTile> tiles;
+
+    // Список всех заспавненных типов
+    public string[,] gridTypes;
 
     private float[,,] probs;
     private float[,] score;
@@ -24,6 +28,8 @@ public class WaveCollaps : MonoBehaviour
     {
         probs = new float[grid.x, grid.y, tiles.Count];
         score = new float[grid.x, grid.y];
+
+        gridTypes = new String[grid.x, grid.y];
 
 
         // Словарь которые мапит имя тайла и канал на который он влияет
@@ -46,9 +52,37 @@ public class WaveCollaps : MonoBehaviour
             }
         }
 
+        // Даём возможность игроку нормально заспавниться, путём задавания корректной точки спавна
+        //! В теории, нужно учитывать, чтобы была возможность пройти из одной части игры в другую, но...
+
+        // Ставим тайлик
+        gridTypes[0, 0] = tiles[1].Name;
+        Instantiate(tiles[1].Tile, transform.position + new Vector3(0, tiles[1].Tile.transform.position.y, 0), transform.rotation).transform.parent = transform;
+        score[0, 0] = 20;
+
+        // Обновляем вероятности соседей
+        foreach (Vector2Int dir in directions)
+        {
+            int nx = 0 + dir.x;
+            int ny = 0 + dir.y;
+
+            if (nx < 0 || ny < 0 || nx >= grid.x || ny >= grid.y || score[nx, ny] == 20)
+            {
+                continue;
+            }
+
+            // Для каждого канала обновляем вероятности и скор
+            foreach (WCTilePair pair in tiles[1].Prob)
+            {
+                score[nx, ny] -= probs[nx, ny, name2ind[pair.tile.name]];
+                probs[nx, ny, name2ind[pair.tile.name]] *= pair.prob;
+                score[nx, ny] += probs[nx, ny, name2ind[pair.tile.name]];
+            }
+        }
+
 
         // Ставим тайлики
-        for (int placeTile = 0; placeTile < grid.x * grid.y; placeTile++)
+        for (int placeTile = 1; placeTile < grid.x * grid.y; placeTile++)
         {
             int sx = 0, sy = 0;
             float ss = score[0, 0];
@@ -73,7 +107,7 @@ public class WaveCollaps : MonoBehaviour
             {
                 total += probs[sx, sy, ch];
             }
-            float rnd = Random.value;
+            float rnd = UnityEngine.Random.value;
             float cumsum = 0;
             int selected_ind = tiles.Count - 1;
             // Выбираем случайный канал используя веса
@@ -89,6 +123,7 @@ public class WaveCollaps : MonoBehaviour
             }
 
             // Ставим тайлик
+            gridTypes[sx, sy] = tiles[selected_ind].Name;
             Instantiate(tiles[selected_ind].Tile, transform.position + new Vector3(sx, tiles[selected_ind].Tile.transform.position.y, sy), transform.rotation).transform.parent = transform;
             score[sx, sy] = 20;
 
@@ -102,7 +137,7 @@ public class WaveCollaps : MonoBehaviour
                 {
                     continue;
                 }
-                
+
                 // Для каждого канала обновляем вероятности и скор
                 foreach (WCTilePair pair in tiles[selected_ind].Prob)
                 {
@@ -113,6 +148,7 @@ public class WaveCollaps : MonoBehaviour
             }
 
         }
+        Console.WriteLine("END");
     }
 
 }
