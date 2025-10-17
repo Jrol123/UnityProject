@@ -18,6 +18,6 @@ MonoBehaviour:
   - tile: {fileID: 5852245290987440894, guid: 9ced0dab83d15f94eb6c316d6f8f568c, type: 3}
     probability: 0
   - tile: {fileID: 2430274283751311126, guid: b215dbabcba77f84db35932c4ab06557, type: 3}
-    probability: 0.5
+    probability: 0.25
   - tile: {fileID: 8142551957074409587, guid: 7bef43b94a28a4b4089716be97035a2f, type: 3}
     probability: 0.5
