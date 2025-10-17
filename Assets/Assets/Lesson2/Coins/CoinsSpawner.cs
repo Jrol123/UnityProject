@@ -30,7 +30,8 @@ public class CoinsSpawner : MonoBehaviour
             }
         }
 
-        y = 0;
+        // fix чтобы не спавнилось на начальной клетке
+        y = 1;
 
         for (int x = 0; x < grid.x; x++)
         {
