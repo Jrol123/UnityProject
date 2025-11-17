@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5135140459930906798}
   - component: {fileID: -5005569706638629802}
   m_Layer: 0
-  m_Name: Rocket
+  m_Name: PoisonRocket
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -72,7 +72,7 @@ MonoBehaviour:
   speed: 4
   detonationTime: 3
   explosion: {fileID: 2944296704455042818, guid: 88c170e6830971d47899050b7c80c91e, type: 3}
-  damageType: {fileID: 11400000, guid: 9975005c83dcbf14d8c6f677b0d4a24c, type: 2}
+  damageType: {fileID: 11400000, guid: 9cb9fcbee9a333a4587e0bf06fe24b80, type: 2}
 --- !u!1 &1489854418725231250
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,6 +6,7 @@ public class RLLaunch : MonoBehaviour
 {
     [SerializeField] private InputActionAsset InputActions;
     [SerializeField] private float coolDown = 2f;
+    [SerializeField] private bool shouldFireAutomaticaly = false;
     [SerializeField] private Transform launchPoint;
     [SerializeField] private GameObject rocket;
     private bool canShoot = true;
@@ -37,9 +38,12 @@ public class RLLaunch : MonoBehaviour
     }
     void Update()
     {
-        if (launchAction.IsPressed() && canShoot)
+        if (canShoot)
         {
-            StartCoroutine(Launch());
+            if (shouldFireAutomaticaly || launchAction.IsPressed())
+            {
+                StartCoroutine(Launch());
+            }
         }
     }
 }

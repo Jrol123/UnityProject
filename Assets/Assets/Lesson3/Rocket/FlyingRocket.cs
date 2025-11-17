@@ -6,6 +6,7 @@ public class FlyingRocket : MonoBehaviour
     [SerializeField] float speed;
     [SerializeField] float detonationTime;
     [SerializeField] GameObject explosion;
+    [SerializeField] DamageType damageType;
 
     void Awake()
     {
@@ -25,9 +26,24 @@ public class FlyingRocket : MonoBehaviour
     IEnumerator Detonate()
     {
         yield return new WaitForSeconds(detonationTime);
+        Detonation();
+    }
+
+    void Detonation()
+    {
         Debug.Log("Detonated");
         Destroy(Instantiate(explosion, transform.position, transform.rotation), explosion.GetComponent<ParticleSystem>().main.duration);
 
         Destroy(gameObject);
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.name == "Player")
+        {
+            var hp = collision.gameObject.GetComponent<Health>();
+            hp.TakeDamage(damageType);
+            Detonation();
+        }
     }
 }
