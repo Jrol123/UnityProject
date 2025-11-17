@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    [SerializeField] public int maxHealth;
+    public int maxHealth;
     private int currentHealth;
     private int futureHealth; // Для лечения или ядов (a. k. a. для замедленного действия)
     private int remaining_ticks = 0;
@@ -27,7 +27,12 @@ public class Health : MonoBehaviour
 
     IEnumerator PoisonDamage(DamageType damageType)
     {
-        remaining_ticks += damageType.ticks;
+        if (remaining_ticks != 0)
+        {
+            remaining_ticks += damageType.ticks;
+            yield break;
+        }
+        remaining_ticks = damageType.ticks;
         OnPoisonChanged?.Invoke(currentHealth, futureHealth, remaining_ticks);
         while (remaining_ticks > 0)
         {

@@ -4,7 +4,7 @@ using UnityEngine;
 public class DamageType : ScriptableObject
 {
     public int damage;
-    public int ticks;
-    public int delaySeconds;
-    public int subDamage;
+    public int ticks = 0;
+    public int delaySeconds = 0;
+    public int subDamage = 0;
 }
