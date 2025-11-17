@@ -25,9 +25,21 @@ public class FlyingRocket : MonoBehaviour
     IEnumerator Detonate()
     {
         yield return new WaitForSeconds(detonationTime);
+        Detonation();        
+    }
+
+    void Detonation()
+    {
         Debug.Log("Detonated");
         Destroy(Instantiate(explosion, transform.position, transform.rotation), explosion.GetComponent<ParticleSystem>().main.duration);
 
         Destroy(gameObject);
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.name == "Player"){
+            Detonation();
+        }
     }
 }
