@@ -11,13 +11,14 @@ public class Instance_Placer : MonoBehaviour
     void Awake()
     {
         matrices = new List<Matrix4x4[]>();
-        for (int i = 0; i < mats.Count * meshes.Count; i++)
+        int total_count_poses = mats.Count * meshes.Count;
+        for (int i = 0; i < total_count_poses; i++)
         {
-            matrices.Add(new Matrix4x4[numberOfFans / (mats.Count * meshes.Count)]);
+            matrices.Add(new Matrix4x4[numberOfFans / total_count_poses]);
 
             Vector4[] colors = new Vector4[1];
 
-            for (int j = 0; j < numberOfFans / (mats.Count * meshes.Count); j++)
+            for (int j = 0; j < numberOfFans / total_count_poses; j++)
             {
                 // Random position and rotation
                 Vector3 position = new Vector3(Random.Range(-range, range), 5f, Random.Range(-range, range));
