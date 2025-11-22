@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Instance_Placer : MonoBehaviour
 {
-    [SerializeField] Mesh mesh;
+    [SerializeField] List<Mesh> meshes;
     [SerializeField] List<Material> mats;
     private List<Matrix4x4[]> matrices;
     [SerializeField] int numberOfFans = 1000;
@@ -11,13 +11,13 @@ public class Instance_Placer : MonoBehaviour
     void Awake()
     {
         matrices = new List<Matrix4x4[]>();
-        for (int i = 0; i < mats.Count; i++)
+        for (int i = 0; i < mats.Count * meshes.Count; i++)
         {
-            matrices.Add(new Matrix4x4[numberOfFans / mats.Count]);
+            matrices.Add(new Matrix4x4[numberOfFans / (mats.Count * meshes.Count)]);
 
             Vector4[] colors = new Vector4[1];
 
-            for (int j = 0; j < numberOfFans / mats.Count; j++)
+            for (int j = 0; j < numberOfFans / (mats.Count * meshes.Count); j++)
             {
                 // Random position and rotation
                 Vector3 position = new Vector3(Random.Range(-range, range), 5f, Random.Range(-range, range));
@@ -29,6 +29,7 @@ public class Instance_Placer : MonoBehaviour
                     Quaternion.Euler(90, 0, 0),
                     Vector3.one * 2
                 );
+
             }
 
         }
@@ -36,14 +37,17 @@ public class Instance_Placer : MonoBehaviour
 
     void Update()
     {
-        for (int i = 0; i < mats.Count; i++)
+        for (int j = 0; j < meshes.Count; j++)
         {
-            Graphics.DrawMeshInstanced(
-                mesh,
-                0,
-                mats[i],
-                matrices[i]                
-            );
+            for (int i = 0; i < mats.Count; i++)
+            {
+                Graphics.DrawMeshInstanced(
+                    meshes[j],
+                    0,
+                    mats[i],
+                    matrices[i + mats.Count * j]
+                );
+            }
         }
     }
 }
